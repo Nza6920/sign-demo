@@ -5,9 +5,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://niu-n6920.mysql.rds.aliyuncs.com:3306/security-demo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: nza
-      password: nza08157016
+      url: jdbc:mysql://你的数据库配置:3306/数据库名称?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: 数据库用户
+      password: 数据库密码
       initial-size: 10
       max-active: 100
       min-idle: 10
