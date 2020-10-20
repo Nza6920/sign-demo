@@ -16,6 +16,11 @@ public enum ValidateCodeType {
         public String getParamNameOnValidate() {
             return "smsCode";
         }
+
+        @Override
+        public String getRepoType() {
+            return "session";
+        }
     },
 
     /**
@@ -26,7 +31,15 @@ public enum ValidateCodeType {
         public String getParamNameOnValidate() {
             return "mobile";
         }
+
+        @Override
+        public String getRepoType() {
+            return "session";
+        }
     };
 
     public abstract String getParamNameOnValidate();
+
+    public abstract String getRepoType();
+
 }

@@ -13,13 +13,13 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @version 1.0 [2020/10/12 14:25]
  * @createTime [2020/10/12 14:25]
  */
-@Component
+@Component("sessionValidateCodeRepository")
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
 
     /**
      * 验证码放入session时的前缀
      */
-    String SESSION_KEY_PREFIX = "SESSION_KEY_FOR_CODE_";
+    private static final String SESSION_KEY_PREFIX = "SESSION_KEY_FOR_CODE_";
 
     @Override
     public void save(ServletWebRequest request, ValidateCode code, ValidateCodeType validateCodeType) {

@@ -1,6 +1,7 @@
 package com.niu.sign.validate.process.impl;
 
 import com.niu.sign.validate.ValidateCode;
+import com.niu.sign.validate.ValidateCodeRepositoryHolder;
 import com.niu.sign.validate.ValidateCodeType;
 import com.niu.sign.validate.generate.ValidateCodeGenerator;
 import com.niu.sign.validate.process.ValidateCodeProcessor;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @createTime [2020/10/12 13:50]
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
+
     /**
      * 收集系统中所有的 {@link ValidateCodeGenerator} 接口的实现 - 依赖搜索
      */
@@ -28,7 +30,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     private Map<String, ValidateCodeGenerator> validateCodeGenerators;
 
     @Autowired
-    private ValidateCodeRepository validateCodeRepository;
+    private ValidateCodeRepositoryHolder validateCodeRepositoryHolder;
 
     @Override
     public void create(ServletWebRequest request) throws Exception {
@@ -62,7 +64,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      */
     private void save(ServletWebRequest request, C validateCode) {
         ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
-        validateCodeRepository.save(request, code, getValidateCodeType(request));
+        validateCodeRepositoryHolder.findValidateCodeRepository(getValidateCodeType()).save(request, code, getValidateCodeType());
     }
 
     /**
@@ -91,12 +93,11 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     /**
      * 获取验证码类型
      *
-     * @param request 请求
      * @return {@link com.niu.sign.validate.ValidateCodeType} 验证码类型
      * @author nza
      * @createTime 2020/10/12 14:08
      */
-    private ValidateCodeType getValidateCodeType(ServletWebRequest request) {
+    private ValidateCodeType getValidateCodeType() {
         String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
         return ValidateCodeType.valueOf(type.toUpperCase());
     }
@@ -104,9 +105,9 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Override
     public void validate(ServletWebRequest request) {
 
-        ValidateCodeType codeType = getValidateCodeType(request);
+        ValidateCodeType codeType = getValidateCodeType();
 
-        ValidateCode codeInStore = validateCodeRepository.get(request, codeType);
+        ValidateCode codeInStore = validateCodeRepositoryHolder.findValidateCodeRepository(getValidateCodeType()).get(request, codeType);
 
         String codeInRequest;
         try {
@@ -125,7 +126,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         }
 
         if (codeInStore.isExpired()) {
-            validateCodeRepository.remove(request, codeType);
+            validateCodeRepositoryHolder.findValidateCodeRepository(getValidateCodeType()).remove(request, codeType);
             throw new RuntimeException(codeType + "验证码已过期");
         }
 
@@ -133,6 +134,6 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
             throw new RuntimeException(codeType + "验证码不匹配");
         }
 
-        validateCodeRepository.remove(request, codeType);
+        validateCodeRepositoryHolder.findValidateCodeRepository(getValidateCodeType()).remove(request, codeType);
     }
 }

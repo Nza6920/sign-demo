@@ -1,6 +1,7 @@
 package com.niu.sign.controller;
 
 import com.niu.sign.pojo.SysUser;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,6 @@ public class UserController {
 
     @GetMapping("/me")
     public SysUser me(@AuthenticationPrincipal Principal principal) {
-        return (SysUser) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        return (SysUser) ((AbstractAuthenticationToken) principal).getPrincipal();
     }
 }
