@@ -38,12 +38,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     /**
      * 存放所有需要校验验证码的url
      */
-    private Map<String, ValidateCodeType> urlMap = new HashMap<>();
+    private final Map<String, ValidateCodeType> urlMap = new HashMap<>();
 
     /**
      * 验证请求url与配置的url是否匹配的工具类
      */
-    private AntPathMatcher pathMatcher = new AntPathMatcher();
+    private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     /**
      * 系统中的校验码处理器

@@ -29,7 +29,7 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
     /**
      * 手机号参数
      */
-    private String mobileParameter = "mobile";
+    private final String mobileParameter = "mobile";
 
     /**
      * 仅支持 post 方法请求

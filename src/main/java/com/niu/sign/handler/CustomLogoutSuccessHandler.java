@@ -34,7 +34,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
     /**
      * json
      */
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

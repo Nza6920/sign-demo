@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class SysUserDetailServiceImpl implements SysUserService {
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -26,7 +27,7 @@ public class SysUserDetailServiceImpl implements SysUserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("username： " + username);
 
-        // todo: 自己实现逻辑
+        // todo: 自己登录实现逻辑
 
         SysUser user = new SysUser();
         user.setName("admin");

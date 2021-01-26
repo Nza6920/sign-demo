@@ -19,7 +19,7 @@ public enum ValidateCodeType {
 
         @Override
         public String getRepoType() {
-            return "session";
+            return "redis";
         }
     },
 
@@ -29,7 +29,7 @@ public enum ValidateCodeType {
     IMAGE {
         @Override
         public String getParamNameOnValidate() {
-            return "mobile";
+            return "imageCode";
         }
 
         @Override

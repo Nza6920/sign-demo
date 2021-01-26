@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
  * @createTime [2020/10/12 14:16]
  */
 public class ImageCode extends ValidateCode {
+
     private static final long serialVersionUID = 807900290364374277L;
 
     public ImageCode(BufferedImage image, String code, int expireTime) {
         super(code, expireTime);
         this.image = image;
-
     }
 
     public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) {

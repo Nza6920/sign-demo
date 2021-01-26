@@ -31,12 +31,12 @@ public class SecurityController {
     /**
      * session 工具类
      */
-    private RequestCache requestCache = new HttpSessionRequestCache();
+    private final RequestCache requestCache = new HttpSessionRequestCache();
 
     /**
      * 跳转器
      */
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     /**
      * 当需要身份认证时跳转到这里

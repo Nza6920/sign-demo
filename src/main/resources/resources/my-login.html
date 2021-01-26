@@ -47,17 +47,25 @@
     <table>
         <tr>
             <td>手机号:</td>
-            <td><input type="text" name="mobile" value="13012345678"></td>
+            <td>
+                <label>
+                    <input type="text" name="mobile" value="13012345678">
+                </label>
+            </td>
         </tr>
         <tr>
             <td>短信验证码:</td>
             <td>
-                <input type="text" name="smsCode">
+                <label>
+                    <input type="text" name="smsCode">
+                </label>
                 <a href="/code/sms?mobile=18766667777">发送验证码</a>
             </td>
         </tr>
         <tr>
-            <td colspan="2"><button type="submit">登录</button></td>
+            <td colspan="2">
+                <button type="submit">登录</button>
+            </td>
         </tr>
     </table>
 </form>

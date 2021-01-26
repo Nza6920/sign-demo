@@ -1,13 +1,17 @@
 server:
-  port: 7016
+  port: 9200
+
 spring:
+  redis:
+    port: 6379
+    host: localhost
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://你的数据库配置:3306/数据库名称?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: 数据库用户
-      password: 数据库密码
+      url: jdbc:mysql://niu-n6920.mysql.rds.aliyuncs.com:3306/security-demo?useUnicode=true&useSSL=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: nza
+      password: nza08157016
       initial-size: 10
       max-active: 100
       min-idle: 10
@@ -31,23 +35,11 @@ spring:
         wall:
           config:
             multi-statement-allow: true
-mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*.xml
-  #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.niu.sign.*
-  global-config:
-    #数据库相关配置
-    db-config:
-      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
-      id-type: assign_uuid
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-    banner: false
-  #原生配置
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: false
-    call-setters-on-nulls: true
-    jdbc-type-for-null: 'null'
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+
 
 
